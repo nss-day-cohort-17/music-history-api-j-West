@@ -37,11 +37,19 @@ module.exports.addSong = ({body}, res, next) => {
 }
 
 module.exports.deleteSong = ({params: {SongId}}, res, next) => {
-  Song.forge()
-  .where({SongId})
+  Song.where({SongId})
   .destroy()
-  .then(show => res.status(202).json(show))
+  .then(show => res.status(202).json({"msg": "Song Deleted"}))
   .catch(error => {
     next(error)
   })
+}
+
+module.exports.editSong = ({body: {Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId}, params: {SongId}}, res, next) => {  
+    Song.where({SongId})
+    .save({Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId}, {method: 'update'})
+    .then(data => res.status(202).json(data))
+    .catch(error => {
+      next(error)
+    })
 }
