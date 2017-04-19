@@ -35,3 +35,13 @@ module.exports.addSong = ({body}, res, next) => {
     next(error)
   })
 }
+
+module.exports.deleteSong = ({params: {SongId}}, res, next) => {
+  Song.forge()
+  .where({SongId})
+  .destroy()
+  .then(show => res.status(202).json(show))
+  .catch(error => {
+    next(error)
+  })
+}
