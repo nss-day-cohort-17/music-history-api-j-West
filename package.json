@@ -4,7 +4,8 @@
   "scripts": {
     "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "start": "nodemon bin/music_history",
-    "test": "mocha --recursive --watch -R list"
+    "test": "mocha --recursive --watch -R list",
+    "lint": "standard --verbose | snazzy || true"
   },
   "engines": {
     "node": "7.3.0"
